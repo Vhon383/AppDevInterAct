@@ -3,270 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front-End Development | Slate Archive</title>
+    <title>The Front-End Archive</title>
     <style>
         :root {
-            --deep-slate: #1e293b;
-            --cool-gray: #475569;
-            --silver: #cbd5e1;
-            --off-white: #f8fafc;
-            --accent-blue: #64748b;
-            --glass-white: rgba(255, 255, 255, 0.98);
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-silver: #cbd5e1;
+            --accent-blue: #38bdf8;
+            --glass-modal: rgba(30, 41, 59, 0.98);
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             margin: 0;
-            font-family: 'Times New Roman', serif;
-            background-color: #f1f5f9;
-            color: var(--deep-slate);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            line-height: 1.6;
         }
 
         /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
             padding: 20px;
-            position: relative;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 32px 32px; /* Dotted grid from image_7a7c61.png */
         }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(var(--cool-gray) 0.5px, transparent 0.5px);
-            background-size: 30px 30px;
-            opacity: 0.2;
-        }
+        .hero span { color: var(--accent-blue); letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase; }
 
         .hero h1 {
-            position: relative;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            color: var(--silver);
+            font-family: 'Georgia', serif; /* Matching image_7a7c61.png */
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin: 20px 0;
         }
 
         .hero p {
-            position: relative;
-            font-family: sans-serif;
+            max-width: 700px;
+            color: var(--text-silver);
             font-size: 1.1rem;
-            max-width: 550px;
-            color: var(--silver);
-            margin: 20px 0;
-            line-height: 1.6;
+            margin-bottom: 40px;
         }
 
-        .cta-btn {
-            position: relative;
-            border: 1px solid var(--silver);
-            color: white;
-            padding: 14px 40px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-family: sans-serif;
-            letter-spacing: 2px;
-            transition: 0.4s;
-            background: rgba(255,255,255,0.05);
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            cursor: pointer;
         }
 
-        .cta-btn:hover { background: var(--silver); color: var(--deep-slate); }
-
-        /* --- CONTENT SECTION --- */
-        .main-content {
+        /* --- GRID SECTION --- */
+        .archive-section {
             padding: 100px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-family: 'Georgia', serif; font-size: 2.5rem; letter-spacing: 2px; }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .card {
-            background: var(--glass-white);
-            border-radius: 4px;
+            background: var(--card-bg);
             padding: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border-left: 1px solid var(--silver);
-            transition: 0.3s;
+            border-radius: 4px;
+            position: relative;
+            transition: 0.3s ease;
             display: flex;
             flex-direction: column;
         }
 
-        .card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid var(--cool-gray);
-            transform: translateY(-5px);
+        .card::before { /* Numbering from image_7a7c9e.png */
+            content: attr(data-num);
+            position: absolute;
+            top: 10px; right: 20px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
         }
 
-        .tag {
-            color: var(--cool-gray);
-            font-size: 0.75rem;
-            font-weight: bold;
-            font-family: sans-serif;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 20px;
-        }
+        .card:hover { transform: translateY(-10px); background: #26334d; }
 
-        .card h2 { margin: 0 0 15px 0; font-size: 1.6rem; color: #1e293b; }
-        .card p { font-family: sans-serif; color: #475569; line-height: 1.7; flex-grow: 1; }
+        .card h3 { font-family: 'Georgia', serif; font-size: 1.6rem; margin-top: 0; }
+        .card p { color: var(--text-silver); font-size: 0.95rem; flex-grow: 1; }
 
-        .read-more {
-            display: inline-block;
-            margin-top: 20px;
-            color: var(--deep-slate);
-            font-weight: bold;
+        .read-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            width: fit-content;
             cursor: pointer;
-            font-family: sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
-            border-bottom: 2px solid var(--silver);
-            align-self: flex-start;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
         }
 
+        .read-btn:hover { background: white; color: var(--bg-dark); }
+
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
         }
 
         .modal {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            padding: 50px;
-            border-radius: 2px;
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 650px;
+            padding: 60px;
+            border-radius: 4px;
             position: relative;
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
         .close-modal {
             position: absolute;
-            top: 20px; right: 20px;
+            top: 25px; right: 25px;
             background: none;
             border: none;
+            color: white;
             font-size: 2rem;
             cursor: pointer;
-            color: var(--cool-gray);
+            opacity: 0.5;
         }
 
-        .pill-group { margin-top: 25px; display: flex; gap: 8px; flex-wrap: wrap; }
-        .pill {
-            background: #f1f5f9;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-family: sans-serif;
-            color: var(--cool-gray);
-            border: 1px solid var(--silver);
+        .modal-tag { color: var(--accent-blue); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+        .modal h2 { font-family: 'Georgia', serif; font-size: 2.2rem; margin: 15px 0; }
+        .modal-body { color: var(--text-silver); font-size: 1rem; line-height: 1.8; }
+        .modal-body ul { padding-left: 20px; }
+        .modal-body li { margin-bottom: 10px; }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+
+        @media (max-width: 600px) {
+            .modal { padding: 30px; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
     <section class="hero">
-        <p>DOCUMENTATION ARCHIVE 2026</p>
-        <h1>What is <br> Frontend?</h1>
-        <p>A systematic study of user interface technologies, focusing on the core trinity of web development and modern responsive standards.</p>
-        <div style="margin-top: 40px;">
-            <a href="#explore" class="cta-btn">VIEW COLLECTION</a>
+        <span>Team Horve</span>
+        <h1>What is Front-End
+             Development?</h1>
+        <p>Front-end development is the art and science of building the visual and interactive elements of websites and applications that users directly engage with. It transforms design concepts into functional, responsive experiences through code.
+
+Using languages like HTML, CSS, and JavaScript, front-end developers bridge the gap between static designs and dynamic, user-friendly interfaces that work seamlessly across devices and browsers.</p>
+        <div class="scroll-indicator" onclick="document.getElementById('archive').scrollIntoView()">
+            EXPLORE<br>▼
         </div>
     </section>
 
-    <div class="main-content" id="explore">
+    <section class="archive-section" id="archive">
+        <div class="section-header">
+            <span>Knowledge Base</span>
+            <h2>The Archive</h2>
+        </div>
+
         <div class="grid">
-            <div class="card">
-                <span class="tag">01 / DEVELOPMENT</span>
-                <h2>Core Web Development</h2>
-                <p>Create a simple web page using HTML for structure, style it with CSS, and add interactivity with JavaScript.</p>
-                <span class="read-more" onclick="openModal('dev')">READ SPECIFICATIONS →</span>
-                <div class="pill-group">
-                    <span class="pill">#HTML5</span><span class="pill">#CSS3</span><span class="pill">#JS</span>
-                </div>
+            <div class="card" data-num="01">
+                <span class="modal-tag">Architecture</span>
+                <h3>Why Responsive Design Matters</h3>
+                <p>Ensuring your content reaches everyone—regardless of screen size or device constraints.</p>
+                <button class="read-btn" onclick="openModal('resp')">Read More →</button>
             </div>
 
-            <div class="card">
-                <span class="tag">02 / ADAPTABILITY</span>
-                <h2>Responsive Design</h2>
-                <p>Apply responsive design principles to ensure web applications function well on various devices.</p>
-                <span class="read-more" onclick="openModal('resp')">READ SPECIFICATIONS →</span>
-                <div class="pill-group">
-                    <span class="pill">#MOBILE</span><span class="pill">#VIEWPORT</span>
-                </div>
+            <div class="card" data-num="02">
+                <span class="modal-tag">Efficiency</span>
+                <h3>Purpose of Frameworks</h3>
+                <p>Solving the challenge of building complex, interactive applications that remain maintainable.</p>
+                <button class="read-btn" onclick="openModal('purp')">Read More →</button>
             </div>
 
-            <div class="card">
-                <span class="tag">03 / FRAMEWORKS</span>
-                <h2>Modern Ecosystem</h2>
-                <p>Utilize powerful frameworks to build scalable, reusable components and handle complex application states.</p>
-                <span class="read-more" onclick="openModal('frame')">READ SPECIFICATIONS →</span>
-                <div class="pill-group">
-                    <span class="pill">#REACT</span><span class="pill">#VUE</span><span class="pill">#ANGULAR</span>
-                </div>
+            <div class="card" data-num="03">
+                <span class="modal-tag">Ecosystem</span>
+                <h3>Introduction to Frameworks</h3>
+                <p>Exploring the landscape of modern front-end tools shaping today's web.</p>
+                <button class="read-btn" onclick="openModal('intro')">Read More →</button>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
         <div class="modal" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="document.getElementById('modalOverlay').style.display='none'">×</button>
-            <div id="modalBody"></div>
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div id="modalContent"></div>
         </div>
     </div>
 
     <script>
         const content = {
-            dev: {
-                tag: "TECHNICAL SPECS",
-                title: "Development Workflow",
-                body: "Frontend development relies on the seamless integration of three layers: HTML (Structure), CSS (Presentation), and JavaScript (Behavior). This trifecta allows for the creation of static documents that transform into dynamic, interactive experiences."
-            },
             resp: {
-                tag: "ADAPTIVE SPECS",
-                title: "Responsive Strategy",
-                body: "Responsive design uses flexible grids, fluid images, and media queries to adapt the UI to the user's screen. This ensures that whether a user is on a phone or a desktop, the layout remains functional and legible."
+                tag: "Archive Entry",
+                title: "Why Responsive Design Matters",
+                body: `
+                    <p>Responsive design is a fundamental requirement of modern web development. With over 60% of web traffic coming from mobile, websites must adapt fluidly.</p>
+                    <strong>Key Impacts:</strong>
+                    <ul>
+                        <li><strong>SEO Performance</strong> — Google prioritizes mobile-friendly sites.</li>
+                        <li><strong>Accessibility</strong> — Ensures content reaches all users equally.</li>
+                        <li><strong>Future-Proofing</strong> — Adapts to new devices without rewrites.</li>
+                    </ul>
+                `
             },
-            frame: {
-                tag: "ECOSYSTEM SPECS",
-                title: "The Role of Frameworks",
-                body: "Modern frameworks like React and Angular streamline development by providing a structured way to build UI components. They manage data efficiently, allowing developers to focus on features rather than manual DOM manipulation."
+            purp: {
+                tag: "Archive Entry",
+                title: "Purpose of Front-End Frameworks",
+                body: `
+                    <p>Frameworks solve the challenge of building complex apps through <strong>component-based architecture</strong>.</p>
+                    <ul>
+                        <li><strong>Consistency</strong> — Shared components ensure visual coherence.</li>
+                        <li><strong>Efficiency</strong> — "Write once, use everywhere" reduces code.</li>
+                        <li><strong>State Management</strong> — Simplifies complex user interactions.</li>
+                    </ul>
+                `
+            },
+            intro: {
+                tag: "Archive Entry",
+                title: "Introduction to Frameworks",
+                body: `
+                    <p>The front-end ecosystem offers several powerful tools with distinct strengths:</p>
+                    <div style="background:rgba(255,255,255,0.05); padding:15px; margin-bottom:10px;">
+                        <strong>React</strong>: Pioneered the component-based approach and virtual DOM.
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05); padding:15px; margin-bottom:10px;">
+                        <strong>Vue.js</strong>: Known for its progressive adoption and gentle learning curve.
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05); padding:15px;">
+                        <strong>Angular</strong>: Google's comprehensive framework for enterprise applications.
+                    </div>
+                `
             }
         };
 
         function openModal(id) {
             const data = content[id];
-            document.getElementById('modalBody').innerHTML = `
-                <span style="color:var(--cool-gray); font-size:0.75rem; letter-spacing:2px;">${data.tag}</span>
-                <h2 style="font-size:2.2rem; margin:15px 0; color:var(--deep-slate);">${data.title}</h2>
-                <hr style="border:0; border-top:1px solid #eee; margin-bottom:20px;">
-                <p style="font-family:sans-serif; line-height:1.8; color:var(--cool-gray);">${data.body}</p>
+            document.getElementById('modalContent').innerHTML = `
+                <span class="modal-tag">${data.tag}</span>
+                <h2>${data.title}</h2>
+                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
+                <div class="modal-body">${data.body}</div>
             `;
             document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeModal(e) { document.getElementById('modalOverlay').style.display = 'none'; }
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 </html>
