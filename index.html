@@ -1,54 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Front-End Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="logo">TeamHorve</div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#archive" onclick="toggleMenu()">Archive</a></li>
+            <li><a href="#team" onclick="toggleMenu()">Team</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
     <section class="hero">
+        <div class="hero-bg">
+            <div class="grid-overlay"></div>
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
         <span>Team Horve</span>
         <h1>What is Front-End Development?</h1>
         <p>
-            Front-end development is the art and science of building the visual and interactive elements of websites...
+            Front-end development is the art and science of building the visual and interactive parts of websites.
+            It focuses on how users experience a web application, from layout and design to interactivity and
+            responsiveness.
+            This guide explores core front-end technologies, responsive design principles, and modern frameworks.
         </p>
-        <div class="scroll-indicator" onclick="document.getElementById('archive').scrollIntoView()">
-            EXPLORE<br>▼
-        </div>
+        <a href="#archive" class="explore-btn">Start Exploring</a>
     </section>
 
+    <!-- ARCHIVE SECTION -->
     <section class="archive-section" id="archive">
-        <div class="section-header">
+        <div class="section-header reveal">
             <span>Knowledge Base</span>
             <h2>The Archive</h2>
         </div>
 
         <div class="grid">
-            <div class="card" data-num="01">
-                <span class="modal-tag">Architecture</span>
+
+            <div class="card reveal" data-num="01">
+                <span class="modal-tag">Fundamentals</span>
+                <h3>Core Front-End Technologies</h3>
+                <p>How HTML, CSS, and JavaScript work together to build web pages.</p>
+                <button class="read-btn" onclick="openModal('core')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="02">
+                <span class="modal-tag">HTML</span>
+                <h3>HTML: Structure & Semantics</h3>
+                <p>Organizing content with headings, sections, and semantic tags for accessibility.</p>
+                <button class="read-btn" onclick="openModal('html')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="03">
+                <span class="modal-tag">CSS</span>
+                <h3>CSS: Styling & Layout</h3>
+                <p>Using colors, spacing, typography, and layout systems like Flexbox/Grid.</p>
+                <button class="read-btn" onclick="openModal('css')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="04">
+                <span class="modal-tag">JavaScript</span>
+                <h3>JavaScript: Interactivity</h3>
+                <p>Handling button clicks and updating content dynamically (DOM manipulation).</p>
+                <button class="read-btn" onclick="openModal('js')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="05">
+                <span class="modal-tag">Responsive</span>
                 <h3>Why Responsive Design Matters</h3>
-                <p>Ensuring your content reaches everyone—regardless of screen size or device constraints.</p>
-                <button class="read-btn" onclick="openModal('resp')">Read More →</button>
+                <p>Ensuring websites work well across desktops, tablets, and mobile devices.</p>
+                <button class="read-btn" onclick="openModal('resp')">Read More</button>
             </div>
 
-            <div class="card" data-num="02">
-                <span class="modal-tag">Efficiency</span>
+            <div class="card reveal" data-num="06">
+                <span class="modal-tag">Frameworks</span>
                 <h3>Purpose of Frameworks</h3>
-                <p>Solving the challenge of building complex, interactive applications that remain maintainable.</p>
-                <button class="read-btn" onclick="openModal('purp')">Read More →</button>
+                <p>Why frameworks exist and how they support scalable, maintainable applications.</p>
+                <button class="read-btn" onclick="openModal('purp')">Read More</button>
             </div>
 
-            <div class="card" data-num="03">
+            <div class="card reveal" data-num="07">
                 <span class="modal-tag">Ecosystem</span>
                 <h3>Introduction to Frameworks</h3>
-                <p>Exploring the landscape of modern front-end tools shaping today's web.</p>
-                <button class="read-btn" onclick="openModal('intro')">Read More →</button>
+                <p>React, Angular, and Vue: popular options used in modern web development.</p>
+                <button class="read-btn" onclick="openModal('intro')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="08">
+                <span class="modal-tag">React Demo</span>
+                <h3>Basic React Usage</h3>
+                <p>A beginner-friendly example showing components and state updates.</p>
+                <button class="read-btn" onclick="openModal('react')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="09">
+                <span class="modal-tag">Reference</span>
+                <h3>Front-End Glossary</h3>
+                <p>Simple explanations of common front-end development terms.</p>
+                <button class="read-btn" onclick="openModal('glossary')">Read More</button>
+            </div>
+
+            <div class="card reveal" data-num="10">
+                <span class="modal-tag">Best Practice</span>
+                <h3>Accessibility & Usability</h3>
+                <p>Designing websites that are usable for everyone.</p>
+                <button class="read-btn" onclick="openModal('access')">Read More</button>
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="team-page" id="team">
+        <div class="section-header reveal">
+            <span>The Minds Behind</span>
+            <h2>Meet the Team</h2>
+        </div>
+
+        <div class="team-grid">
+            <!-- Member 1 -->
+            <div class="team-card reveal">
+                <div class="member-avatar">HY</div>
+                <h3>Horve Ybias</h3>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="team-card reveal" style="animation-delay: 0.2s;">
+                <div class="member-avatar">JO</div>
+                <h3>Joeremy Christie Ong</h3>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="team-card reveal" style="animation-delay: 0.4s;">
+                <div class="member-avatar">VS</div>
+                <h3>Vhon Angelico Salilo</h3>
             </div>
         </div>
     </section>
 
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 TeamHorve :></p>
+
+        </div>
+    </footer>
+
+    <!-- SCROLL TO TOP -->
+    <button id="scrollTopBtn" title="Go to top">↑</button>
+
+    <!-- MODAL -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
         <div class="modal" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="closeModal()">×</button>
@@ -58,4 +181,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
